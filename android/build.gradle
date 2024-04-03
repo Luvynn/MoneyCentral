@@ -1,0 +1,36 @@
+
+buildscript {
+    repositories {
+        google() // Make sure this line is present
+        jcenter() // This line is usually present by default
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0' // Use the appropriate version for your project
+        classpath 'com.google.gms:google-services:4.4.0' // This is the line that's causing the error, make sure google() is listed above
+        // Add other classpath dependencies here
+    }
+}
+
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.buildDir = '../build'
+
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
+apply plugin: 'com.google.gms.google-services'
