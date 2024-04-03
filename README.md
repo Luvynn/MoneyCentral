@@ -1,4 +1,4 @@
-# awesomeapp
+# Money Central App
 
 A new Flutter project.
 
